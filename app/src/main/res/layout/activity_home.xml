@@ -64,6 +64,7 @@
         tools:layout_editor_absoluteY="0dp">
 
 
+
         <LinearLayout
             android:id="@+id/box1"
             android:layout_width="160dp"
@@ -72,7 +73,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="28dp"
             android:layout_marginTop="291dp">
-
 
             <!-- Icono en la esquina superior derecha -->
             <ImageView
