@@ -135,7 +135,6 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-
         <Button
             android:id="@+id/no_tiene_cuenta"
             android:layout_width="wrap_content"

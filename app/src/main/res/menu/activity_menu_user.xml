@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_more"
+        android:icon="@drawable/dots"
+        android:tint="@color/white"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_contact_us"
+                android:icon="@drawable/profile"
+                android:title="Mis datos" />
+            <item
+                android:id="@+id/action_terms_conditions"
+                android:icon="@drawable/logout"
+                android:title="Salir" />
+        </menu>
+    </item>
+</menu>
