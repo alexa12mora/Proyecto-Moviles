@@ -9,17 +9,43 @@
     android:padding="16dp"
     android:background="@color/black"
     tools:context=".calendario.editMedicamento">
+    <FrameLayout
+        android:layout_width="383dp"
+        android:layout_height="wrap_content"
+        android:background="@color/black">
 
+        <ImageView
+            android:id="@+id/app_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/baseline_edit_note_24" />
+
+        <TextView
+            android:id="@+id/tvMedList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Editar"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 
     <ListView
         android:id="@+id/tvTareas"
         android:layout_width="match_parent"
-        android:textColor="@color/white"
         android:layout_height="0dp"
         android:layout_weight="5"
+        android:cacheColorHint="@color/edit_text_background_color"
         android:divider="@color/teal_700"
         android:dividerHeight="1dp"
-        android:cacheColorHint="@color/edit_text_background_color" />
+        android:textColor="@color/white" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

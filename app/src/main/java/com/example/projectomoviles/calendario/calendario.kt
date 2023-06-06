@@ -36,13 +36,10 @@ class calendario : Base_Activity() {
         setContentView(R.layout.calendario)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
         dbHelper = MyDatabaseHelper(this)
-        //loadFromDBToMemory()
+        loadFromDBToMemory()
         initWidgets()
-        title="Calendario"
-        val btnB: ActionBar? = supportActionBar
-        btnB?.setHomeAsUpIndicator(R.drawable.baseline_calendar_month_24)
-        btnB?.setDisplayHomeAsUpEnabled(true)
         val btn: ImageButton = findViewById(R.id.btnAgregar)
         setDayView()
 

@@ -85,15 +85,11 @@ class editMedicamento : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun showEditTaskDialog(tarea: Event, position: Int) {
-        val builder = AlertDialog.Builder(this,R.style.MyDialogTheme)
-        val btnB: ActionBar? = supportActionBar
-        btnB?.setHomeAsUpIndicator(R.drawable.baseline_edit_note_24)
-        btnB?.setDisplayHomeAsUpEnabled(true)
-        btnB?.setTitle("Editar")
-
-
+        val builder = AlertDialog.Builder(this)
         val inputLayout = LayoutInflater.from(this).inflate(R.layout.event_id, null)
+        val tv = inputLayout.findViewById<TextView>(R.id.tvMedicamento)
         val boton: Button = inputLayout.findViewById(R.id.btnEditSave)
+        tv.setText("Editar Medicamento")
         boton.visibility = View.INVISIBLE
 
         eventTimeTV = inputLayout.findViewById(R.id.btnHourPicker)
@@ -154,9 +150,8 @@ class editMedicamento : AppCompatActivity() {
                 break
             }
         }
-        val dialogView = layoutInflater.inflate(R.layout.dialog_custom_title, null)
 
-        val dialog = builder.setCustomTitle(dialogView).create()
+        val dialog = builder.create()
         dialog.window?.setBackgroundDrawableResource(android.R.color.background_dark)
         dialog.window?.setDimAmount(0.7f)
         dialog.window?.setWindowAnimations(R.style.DialogStyle)

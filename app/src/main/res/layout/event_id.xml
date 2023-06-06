@@ -8,7 +8,32 @@
     android:orientation="vertical"
     android:background="@color/black"
     tools:context=".calendario.event_id">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black">
 
+        <ImageView
+            android:id="@+id/app_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_edit_note_24"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="24dp"
+            android:id="@+id/tvMedicamento"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Agregar medicamento"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </FrameLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -288,11 +313,10 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="saveEventAction"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Guardar"
                 android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
+                android:textSize="12sp" />
         </LinearLayout>
 
     </ScrollView>
