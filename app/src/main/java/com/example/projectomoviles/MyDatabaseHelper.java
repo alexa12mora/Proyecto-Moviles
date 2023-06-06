@@ -119,6 +119,26 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //metodo para obtener el ultimo id que se ingresó en la tabla de calendario
+    public int obtenerUltimoId() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String consulta = "SELECT MAX(id) FROM calendar";
+        Cursor cursor = db.rawQuery(consulta, null);
+
+        int ultimoId = -1;
+
+        if (cursor.moveToFirst()) {
+            ultimoId = cursor.getInt(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return ultimoId;
+    }
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean updateCalendarInDB(Event event){
         SQLiteDatabase db = getWritableDatabase();

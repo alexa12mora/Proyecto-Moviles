@@ -1,6 +1,12 @@
 package com.example.projectomoviles.calendario
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -195,7 +201,8 @@ class event_id : AppCompatActivity() {
             var hour= LocalTime.parse(time,formatterHour)
 
             while (!fechaActual.isAfter(fechaFinal)){
-                val newEvent = Event(generateUniqueRandomId(),eventName,fechaActual, hour,eNom,viapresent,viaAdmin,mg,fechaFinal,frec)
+                var id = dbHelper.obtenerUltimoId()+1
+                val newEvent = Event(id,eventName,fechaActual, hour,eNom,viapresent,viaAdmin,mg,fechaFinal,frec)
                 Event.eventsList.add(newEvent)
 
                 var result = dbHelper.addMedToDatabase(newEvent)
