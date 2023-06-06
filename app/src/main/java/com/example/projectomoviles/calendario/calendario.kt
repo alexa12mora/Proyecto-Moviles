@@ -3,33 +3,35 @@ package com.example.projectomoviles.calendario
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.widget.AdapterView
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import com.example.projectomoviles.Base_Activity
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.R
+import com.example.projectomoviles.calendario.calendario_utils.Companion.selectedDate
+import com.example.projectomoviles.util.Common
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalTime
 import java.time.format.TextStyle
 import java.util.*
-import com.example.projectomoviles.calendario.calendario_utils.Companion.selectedDate
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlin.collections.ArrayList
 
-class calendario : Base_Activity() {
+
+class calendario :Base_Activity(){
     lateinit var dbHelper: MyDatabaseHelper
     lateinit var monthDayText: TextView
     lateinit var dayOfWeekTV: TextView
     lateinit var hourListView: ListView
     lateinit var adapter: hour_adapter
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +50,37 @@ class calendario : Base_Activity() {
             startActivity(intent)
 
         }
-        if(hourListView != null){
-            hourListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                val selectedTask = hourListView.getItemAtPosition(position)
-                val selectedTask2 = hourEventList()[position].events
-                val intent = Intent(this,editMedicamento::class.java)
-                intent.putExtra("selectedItem",selectedTask2)
-                startActivityForResult(intent,1)
+
+        var startY = 0f
+        var isScrolling = false
+
+        hourListView.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    startY = event.y
+                    isScrolling = false
+                    false
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val deltaY = event.y - startY
+                    if (!isScrolling && Math.abs(deltaY) > 10) {
+                        // El desplazamiento supera un umbral, se considera un evento de desplazamiento
+                        isScrolling = true
+                    }
+                    v.onTouchEvent(event)
+                }
+                MotionEvent.ACTION_UP -> {
+                    if (!isScrolling) {
+                        // No se ha producido un evento de desplazamiento, se considera un evento de clic
+                        val position = hourListView.pointToPosition(event.x.toInt(), event.y.toInt())
+                        val selectedTask2 = hourEventList()[position].events
+                        val intent = Intent(applicationContext,editMedicamento::class.java)
+                        intent.putExtra("selectedItem",selectedTask2)
+                        startActivityForResult(intent,1)
+                    }
+                    v.onTouchEvent(event)
+                }
+                else -> v.onTouchEvent(event)
             }
         }
     }
@@ -87,6 +113,7 @@ class calendario : Base_Activity() {
                                     x[i].mili = objActualizado[n].mili
                                     x[i].viaAdmin = objActualizado[n].viaAdmin
                                     x[i].present = objActualizado[n].present
+                                    Common.showToastMessage(this, "Medicamento actualizado correctamente")
                                     break
                                 }
                             }

@@ -15,6 +15,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import com.example.projectomoviles.MyDatabaseHelper
+import com.example.projectomoviles.util.Common
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
@@ -118,8 +119,15 @@ class editMedicamento : AppCompatActivity() {
                 selected[position].time = LocalTime.parse(eventTimeTV.text.toString())
                 selected[position].date = LocalDate.parse(fInicio.text.toString())
                 selected[position].dateFinish = LocalDate.parse(fFinal.text.toString())
-                sqLiteManager.updateCalendarInDB(selected[position])
+                var result = sqLiteManager.updateCalendarInDB(selected[position])
                 selected.set(position,selected[position])
+                if(result){
+                    Common.showToastMessage(this,"Medicamento actualizado correctamente")
+
+                }else{
+                    Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                }
+
                 var intent = Intent()
                 intent = intent.putExtra("objUpdate",selected)
                 setResult(Activity.RESULT_OK,intent)
@@ -166,7 +174,14 @@ class editMedicamento : AppCompatActivity() {
         intent = intent.putExtra("objDelete",selected[position].id)
         setResult(2,intent)
         var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
-        sqLiteManager.deleteEventInDB(selected[position].id)
+        var result = sqLiteManager.deleteEventInDB(selected[position].id)
+        if(result){
+            Common.showToastMessage(this,"Medicamento eliminado correctamente")
+
+        }else{
+            Common.showToastMessage(this,"Ha ocurrido un error al intentar eliminar el medicamento.")
+        }
+
         finish()
     }
     private fun initWidgets(inputLayout: View) {

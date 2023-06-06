@@ -107,6 +107,11 @@
         android:dividerHeight="1dp"
         android:cacheColorHint="@color/edit_text_background_color" />
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -120,4 +125,6 @@
         app:itemRippleColor="@color/white"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

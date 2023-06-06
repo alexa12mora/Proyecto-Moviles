@@ -120,7 +120,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void updateCalendarInDB(Event event){
+    public boolean updateCalendarInDB(Event event){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("hour", event.getTime().toString());
@@ -132,12 +132,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("fInicio", event.getDate().toString());
         contentValues.put("fSuspension", event.getDateFinish().toString());
         contentValues.put("frecToma", event.getFrecToma());
-        db.update("calendar",contentValues,"id =?",new String[]{String.valueOf(event.getId())});
+        long result = db.update("calendar",contentValues,"id =?",new String[]{String.valueOf(event.getId())});
+        if(result==-1) return false;
+        else
+            return true;
     }
 
-    public void deleteEventInDB(int id){
+    public boolean deleteEventInDB(int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.delete("calendar","id =?",new String[]{String.valueOf(id)});
-
+        long result = db.delete("calendar","id =?",new String[]{String.valueOf(id)});
+        if(result==-1) return false;
+        else
+            return true;
     }
 }
