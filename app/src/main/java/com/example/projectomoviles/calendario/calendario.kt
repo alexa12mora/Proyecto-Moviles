@@ -13,15 +13,17 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
+import com.example.projectomoviles.Base_Activity
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.R
 import java.time.LocalTime
 import java.time.format.TextStyle
 import java.util.*
 import com.example.projectomoviles.calendario.calendario_utils.Companion.selectedDate
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.collections.ArrayList
 
-class calendario : AppCompatActivity() {
+class calendario : Base_Activity() {
     lateinit var dbHelper: MyDatabaseHelper
     lateinit var monthDayText: TextView
     lateinit var dayOfWeekTV: TextView
@@ -32,6 +34,8 @@ class calendario : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calendario)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
         dbHelper = MyDatabaseHelper(this)
         //loadFromDBToMemory()
         initWidgets()

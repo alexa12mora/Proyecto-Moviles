@@ -50,6 +50,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+    public boolean updateData(String username, String newPassword) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("password", newPassword);
+        int rowsAffected = db.update("users", contentValues, "username=?", new String[]{username});
+        return rowsAffected > 0;
+    }
+
+
+
 
     public boolean chechUser(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -127,7 +137,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteEventInDB(int id){
         SQLiteDatabase db = getWritableDatabase();
-
         db.delete("calendar","id =?",new String[]{String.valueOf(id)});
 
     }

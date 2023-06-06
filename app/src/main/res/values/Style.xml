@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MyDialogTheme" parent="Theme.AppCompat.Dialog">
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light">
         <item name="android:windowTitleStyle">@style/DialogTitleStyle</item>
     </style>
+
 </resources>

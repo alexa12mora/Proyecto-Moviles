@@ -24,38 +24,40 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dbHelper = MyDatabaseHelper(this)
-        username =  findViewById(R.id.username_input);
-        password =  findViewById(R.id.pass);
-        button =  findViewById(R.id.buttonLogin);
-        notienecuenta = findViewById(R.id.no_tiene_cuenta);
+        username = findViewById(R.id.username_input)
+        password = findViewById(R.id.pass)
+        button = findViewById(R.id.buttonLogin)
+        notienecuenta = findViewById(R.id.no_tiene_cuenta)
+        val sessionManager = sessionManager(this);
 
         button.setOnClickListener {
-            val inputUsername = username.text.toString().trim();
-            val inputPassword = password.text.toString().trim();
-            resetInputFields();
+            val inputUsername = username.text.toString().trim()
+            val inputPassword = password.text.toString().trim()
+            resetInputFields()
             if (validateInputs(inputUsername, inputPassword)) {
-                if(dbHelper.chechUser(inputUsername)){
+                if (dbHelper.chechUser(inputUsername)) {
                     if (dbHelper.chechUserPassword(inputUsername, inputPassword)) {
-                        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                        val intent = Intent(this, activity_home::class.java)
+                        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                        sessionManager.startSession(inputUsername);
+                        val intent = Intent(this, activity_home::class.java);
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
-                        findViewById<RelativeLayout>(R.id.relativeLoyoutContrasenia).setBackgroundResource(R.drawable.red_border);
-                        findViewById<RelativeLayout>(R.id.relativeLoyoutCorreo).setBackgroundResource(R.drawable.red_border);
+                        Toast.makeText(this, "Credenciales inválidas", Toast.LENGTH_SHORT).show()
+                        findViewById<RelativeLayout>(R.id.relativeLoyoutContrasenia).setBackgroundResource(R.drawable.red_border)
+                        findViewById<RelativeLayout>(R.id.relativeLoyoutCorreo).setBackgroundResource(R.drawable.red_border)
                     }
-                }else{
+                } else {
                     Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
 
         notienecuenta.setOnClickListener {
-            val intent = Intent(this, activity_register::class.java);
-            startActivity(intent);
+            val intent = Intent(this, activity_register::class.java)
+            startActivity(intent)
         }
     }
     private fun validateInputs(username: String, password: String): Boolean {
