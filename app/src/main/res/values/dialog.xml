@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">
+            @android:color/black
+        </item>
+    </style>
+    <style name="DialogTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#FFFFFF</item> <!-- Set the desired text color, e.g., white -->
+    </style>
+</resources>

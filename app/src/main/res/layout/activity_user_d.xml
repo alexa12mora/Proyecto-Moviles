@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".activity_user_d">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="268dp"
+            android:background="@drawable/blue_bg">
+
+            <ImageView
+                android:layout_width="77dp"
+                android:layout_height="77dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Actualizar mis datos"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeloyoutCorreo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="36.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <!-- INPUT -->
+            <EditText
+                android:id="@+id/username_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/username_icon"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- ICON -->
+            <ImageView
+                android:id="@+id/username_icon"
+                android:layout_width="14.7dp"
+                android:layout_height="10.3dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/email" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativeloyoutContra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="12.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <!-- INPUT -->
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/icon"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="textPassword"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- ICON -->
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="14.7dp"
+                android:layout_height="10.3dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/password" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeloyoutRepiContra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="12.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <!-- INPUT -->
+            <EditText
+                android:id="@+id/pass_ver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/icon1"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="textPassword"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- ICON -->
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="14.7dp"
+                android:layout_height="10.3dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/password" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="18.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_fill__rounded_color"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="Actualizar"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:rippleColor="#000FFF" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:itemBackground="@color/black"
+                app:itemIconTint="@color/white"
+                app:itemRippleColor="@color/white"
+                app:itemTextColor="@color/white"
+                app:labelVisibilityMode="labeled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:menu="@menu/activity_main_drawer" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

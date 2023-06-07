@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    tools:context=".calendario.event_id">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/app_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_edit_note_24"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="24dp"
+            android:id="@+id/tvMedicamento"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Agregar medicamento"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".event_edit"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="38dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="ExtraText">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Nombre del medicamento"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/etNomMedi"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_rounded_background"
+                android:backgroundTint="#2B2929"
+                android:elegantTextHeight="true"
+                android:ems="10"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-medium"
+                android:inputType="textPersonName"
+                android:hint="  Ingrese el nombre del medicamento"
+                android:textColor="#6A6969" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Nombre comercial"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/etNomComer"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_rounded_background"
+                android:backgroundTint="#2B2929"
+                android:elegantTextHeight="true"
+                android:ems="10"
+                android:fontFamily="sans-serif-medium"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:hint="  Ingrese el nombre comercial"
+                android:textColor="#6A6969" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Vía de administración"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinViaAdmi"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_rounded_background"
+                android:backgroundTint="#2B2929"
+                android:contentDescription="Ingrese la vía de administración"
+                android:contextClickable="false"
+                android:textAlignment="center" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Presentación"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinPresent"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_rounded_background"
+                android:backgroundTint="#2B2929"
+                android:contentDescription="Ingrese el tipo de presentación"
+                android:contextClickable="false"
+                android:textAlignment="center" />
+
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Miligramos (mg)"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/etCantMg"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_rounded_background"
+                android:backgroundTint="#2B2929"
+                android:elegantTextHeight="true"
+                android:ems="10"
+                android:hint="Cantidad en mg"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="#6A6969" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Cada cuanto tomarlo (cant días)"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/spinTomarlo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_rounded_background"
+                android:backgroundTint="#2B2929"
+                android:contextClickable="false"
+                android:hint="Ingrese la cantidad en días"
+                android:inputType="number"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Hora de aviso"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnHourPicker"
+                    android:layout_width="380dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/rounded_picker"
+                    android:backgroundTint="#2B2929"
+                    android:onClick="popTimePicker"
+                    android:text="Ingrese la hora de aviso"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Fecha de inicio"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etFechaInicio"
+                    android:layout_width="380dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_rounded_background"
+                    android:backgroundTint="#2B2929"
+                    android:ems="10"
+                    android:hint="Ingrese la fecha de inicio del tratamiento"
+                    android:textAlignment="center"
+                    android:inputType="date" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignBottom="@+id/etFechaInicio"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="346dp"
+                    android:layout_marginBottom="13dp"
+                    android:src="@drawable/baseline_calendar_month_24"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Fecha de suspención"
+                android:textColor="#BFBDBD"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etFechaFinal"
+                    android:layout_width="380dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_rounded_background"
+                    android:backgroundTint="#2B2929"
+                    android:ems="10"
+                    android:hint="Ingrese la suspención del tratamiento"
+                    android:inputType="date"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="21dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/etFechaFinal"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="350dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/baseline_calendar_month_24"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnEditSave"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="saveEventAction"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Guardar"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:menu="@menu/activity_main_drawer"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:itemBackground="@color/black"
+        app:itemRippleColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</LinearLayout>
