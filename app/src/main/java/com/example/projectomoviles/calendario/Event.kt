@@ -116,10 +116,23 @@ class Event : Serializable {
         set(value) {
             field = value
         }
-
+    var userId:Int
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
+    var idGroupMedi: Int
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
 
     constructor(id: Int, name: String, date: LocalDate, time: LocalTime, nMedi: String, present: String, viaAdmin: String, mili: String, dateFinish: LocalDate,
-                frecToma: String) {
+                frecToma: String, userId: Int, idGroupMedi: Int) {
         this.id = id
         this.name = name
         this.date = date
@@ -130,5 +143,7 @@ class Event : Serializable {
         this.mili = mili
         this.dateFinish = dateFinish
         this.frecToma = frecToma
+        this.userId = userId
+        this.idGroupMedi = idGroupMedi
     }
 }
