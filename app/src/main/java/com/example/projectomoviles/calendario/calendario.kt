@@ -18,7 +18,6 @@ import com.example.projectomoviles.Base_Activity
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.R
 import com.example.projectomoviles.calendario.calendario_utils.Companion.selectedDate
-import com.example.projectomoviles.sessionManager
 import com.example.projectomoviles.util.Common
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalTime
@@ -88,11 +87,7 @@ class calendario :Base_Activity(){
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun loadFromDBToMemory() {
-        lateinit var sessionManager: sessionManager
-        var userId: Int
-        sessionManager = sessionManager(this)
-        userId = sessionManager.getUserId()
-        dbHelper.populateCalendarListArray(userId)
+        dbHelper.populateCalendarListArray()
 
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -118,6 +113,7 @@ class calendario :Base_Activity(){
                                     x[i].mili = objActualizado[n].mili
                                     x[i].viaAdmin = objActualizado[n].viaAdmin
                                     x[i].present = objActualizado[n].present
+                                    Common.showToastMessage(this, "Medicamento actualizado correctamente")
                                     break
                                 }
                             }
@@ -136,10 +132,6 @@ class calendario :Base_Activity(){
                             break
                         }
                     }
-                }
-            3->
-                if(requestCode == 1){
-                    loadFromDBToMemory()
                 }
         }
     }

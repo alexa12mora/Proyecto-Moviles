@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 if (dbHelper.chechUser(inputUsername)) {
                     if (dbHelper.chechUserPassword(inputUsername, inputPassword)) {
                         Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                        sessionManager.startSession(dbHelper.getIdUser(inputUsername));
+                        sessionManager.startSession(inputUsername);
                         val intent = Intent(this, activity_home::class.java);
                         startActivity(intent);
                         finish();

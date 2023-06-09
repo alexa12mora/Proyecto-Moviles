@@ -24,9 +24,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)";
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT)";
         db.execSQL(createTableQuery);
-        db.execSQL("CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, hour TEXT, nomMedi TEXT, nomComer TEXT, present TEXT, viaAdmin TEXT, mili TEXT, fInicio TEXT, fSuspension TEXT, frecToma TEXT, idUsuario INTEGER, idGroupMedi INTEGER, FOREIGN KEY (idUsuario)  REFERENCES users(id))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, hour TEXT, nomMedi TEXT, nomComer TEXT, present TEXT, viaAdmin TEXT, mili TEXT, fInicio TEXT, fSuspension TEXT, frecToma TEXT)");
+
     }
 
     @Override
@@ -75,15 +76,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
-    public int getIdUser(String username){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select id from users where username = ?", new String[] {username});
-
-        int id_usuario = -1;
-        if(cursor.moveToFirst())
-            id_usuario = cursor.getInt(0);
-        return id_usuario;
-    }
 
     public boolean addMedToDatabase(Event event) {
         SQLiteDatabase db = getWritableDatabase();
@@ -97,8 +89,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("fInicio", event.getDate().toString());
         contentValues.put("fSuspension", event.getDateFinish().toString());
         contentValues.put("frecToma", event.getName());
-        contentValues.put("idUsuario", event.getUserId());
-        contentValues.put("idGroupMedi", event.getIdGroupMedi());
         long result = db.insert("calendar", null, contentValues);
         if(result==-1) return false;
         else
@@ -106,9 +96,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void populateCalendarListArray(int _userId){
+    public void populateCalendarListArray(){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        try(Cursor result= sqLiteDatabase.rawQuery("SELECT * FROM calendar WHERE idUsuario = ?" , new String[] {String.valueOf(_userId)})){
+        try(Cursor result= sqLiteDatabase.rawQuery("SELECT * FROM calendar",null)){
             if(result.getCount() > 0 ){
                 while (result.moveToNext()){
                     int id = result.getInt(0);
@@ -121,8 +111,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                     String fInicio = result.getString(7);
                     String fSuspension = result.getString(8);
                     String frecToma = result.getString(9);
-                    int idGroupMedi = result.getInt(11);
-                    Event event = new Event(id,nomComer, LocalDate.parse(fInicio), LocalTime.parse(hour),nomMedi,present,viaAdmin,mili,LocalDate.parse(fSuspension),frecToma,_userId,idGroupMedi);
+                    Event event = new Event(id,nomComer, LocalDate.parse(fInicio), LocalTime.parse(hour),nomMedi,present,viaAdmin,mili,LocalDate.parse(fSuspension),frecToma);
                     Event.Companion.getEventsList().add(event);
                 }
             }
@@ -134,23 +123,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public int obtenerUltimoId() {
         SQLiteDatabase db = this.getReadableDatabase();
         String consulta = "SELECT MAX(id) FROM calendar";
-        Cursor cursor = db.rawQuery(consulta, null);
-
-        int ultimoId = -1;
-
-        if (cursor.moveToFirst()) {
-            ultimoId = cursor.getInt(0);
-        }
-
-        cursor.close();
-        db.close();
-
-        return ultimoId;
-    }
-
-    public int obtenerUltimoIdmMedi() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String consulta = "SELECT MAX(idGroupMedi) FROM calendar";
         Cursor cursor = db.rawQuery(consulta, null);
 
         int ultimoId = -1;
@@ -181,29 +153,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("fSuspension", event.getDateFinish().toString());
         contentValues.put("frecToma", event.getFrecToma());
         long result = db.update("calendar",contentValues,"id =?",new String[]{String.valueOf(event.getId())});
-        if(result==-1) return false;
-        else
-            return true;
-    }
-
-    public boolean updateCalendarAllInDB(Event event){
-        SQLiteDatabase db = getWritableDatabase();
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        Cursor cursor= sqLiteDatabase.rawQuery("SELECT * FROM calendar WHERE idUsuario = ? AND idGroupMedi = ?" , new String[] {String.valueOf(event.getUserId()),String.valueOf(event.getIdGroupMedi())});
-        long result = 0;
-        if (cursor.getCount() > 0) {
-            do{
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("nomMedi", event.getNMedi());
-                contentValues.put("nomComer", event.getName());
-                contentValues.put("present", event.getPresent());
-                contentValues.put("viaAdmin", event.getViaAdmin());
-                contentValues.put("mili", event.getMili());
-                contentValues.put("frecToma", event.getFrecToma());
-                contentValues.put("hour", event.getTime().toString());
-                result = db.update("calendar",contentValues,"idGroupMedi =?",new String[]{String.valueOf(event.getIdGroupMedi())});
-            }while (cursor.moveToNext());
-        }
         if(result==-1) return false;
         else
             return true;
