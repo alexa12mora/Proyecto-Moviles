@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "mydatabase.db";
+    private static final String DATABASE_NAME = "moviles.db";
     private static final int DATABASE_VERSION = 1;
 
     public MyDatabaseHelper(Context context) {
@@ -56,10 +56,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int rowsAffected = db.update("users", contentValues, "username=?", new String[]{username});
         return rowsAffected > 0;
     }
-
-
-
-
     public boolean chechUser(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where username = ?", new String[] {username});
