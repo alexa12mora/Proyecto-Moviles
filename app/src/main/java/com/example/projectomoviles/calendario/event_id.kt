@@ -1,12 +1,6 @@
 package com.example.projectomoviles.calendario
 
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.R
+import com.example.projectomoviles.sessionManager
 import com.example.projectomoviles.util.Common
 import java.time.LocalDate
 import java.time.LocalTime
@@ -183,6 +178,11 @@ class event_id : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun saveEventAction(view: View?) {
+        lateinit var sessionManager: sessionManager
+        var userId: Int
+        sessionManager = sessionManager(this)
+        userId = sessionManager.getUserId()
+
         var validacion: Boolean = Common.validateTextBoxesOnAction(textBoxes)
         if (validacion){
             val eNom = eNom.text.toString()
@@ -200,9 +200,10 @@ class event_id : AppCompatActivity() {
             var fechaFinal = LocalDate.parse(eventFinish,formatter)
             var hour= LocalTime.parse(time,formatterHour)
 
+            var idGroupMedi = dbHelper.obtenerUltimoIdmMedi()+1
             while (!fechaActual.isAfter(fechaFinal)){
                 var id = dbHelper.obtenerUltimoId()+1
-                val newEvent = Event(id,eventName,fechaActual, hour,eNom,viapresent,viaAdmin,mg,fechaFinal,frec)
+                val newEvent = Event(id,eventName,fechaActual, hour,eNom,viapresent,viaAdmin,mg,fechaFinal,frec,userId,idGroupMedi)
                 Event.eventsList.add(newEvent)
 
                 var result = dbHelper.addMedToDatabase(newEvent)

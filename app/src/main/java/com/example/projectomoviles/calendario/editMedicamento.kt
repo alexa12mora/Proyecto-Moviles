@@ -105,35 +105,77 @@ class editMedicamento : AppCompatActivity() {
 
 
         builder.setPositiveButton("Guardar") { _, _ ->0
+            val builder2 = AlertDialog.Builder(this)
+            builder2.setTitle("Confirmación")
+            builder2.setMessage("¿Desea actualizar todos los medicamentos?")
 
-            // Actualizar los datos de la tarea
-            if(selected !=null){
-                var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
-                selected[position].id  = selected[position].id
-                selected[position].name = nameInput.text.toString()
-                selected[position].nMedi = nameMedi.text.toString()
-                selected[position].viaAdmin = medioSeleccionado
-                selected[position].present = medioSeleccionado2
-                selected[position].mili = mili.text.toString()
-                selected[position].frecToma = frec.text.toString()
-                selected[position].time = LocalTime.parse(eventTimeTV.text.toString())
-                selected[position].date = LocalDate.parse(fInicio.text.toString())
-                selected[position].dateFinish = LocalDate.parse(fFinal.text.toString())
-                var result = sqLiteManager.updateCalendarInDB(selected[position])
-                selected.set(position,selected[position])
-                if(result){
-                    Common.showToastMessage(this,"Medicamento actualizado correctamente")
+            builder2.setPositiveButton("Sí") { dialog, which ->
+                // Acción a realizar si el usuario selecciona "Sí"
+                if(selected !=null){
+                    var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
+                    selected[position].id  = selected[position].id
+                    selected[position].name = nameInput.text.toString()
+                    selected[position].nMedi = nameMedi.text.toString()
+                    selected[position].viaAdmin = medioSeleccionado
+                    selected[position].present = medioSeleccionado2
+                    selected[position].mili = mili.text.toString()
+                    selected[position].frecToma = frec.text.toString()
+                    selected[position].time = LocalTime.parse(eventTimeTV.text.toString())
 
-                }else{
-                    Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                    // selected[position].date = LocalDate.parse(fInicio.text.toString())
+                    //selected[position].dateFinish = LocalDate.parse(fFinal.text.toString())
+                    var result = sqLiteManager.updateCalendarAllInDB(selected[position])
+                    selected.set(position,selected[position])
+                    Event.eventsList.clear()
+                    if(result){
+                        Common.showToastMessage(this,"Medicamento actualizado correctamente")
+
+                    }else{
+                        Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                    }
+                    adapter.notifyDataSetChanged()
+                    var intent = Intent()
+                    setResult(3,intent)
+                    finish()
                 }
-
-                var intent = Intent()
-                intent = intent.putExtra("objUpdate",selected)
-                setResult(Activity.RESULT_OK,intent)
-                finish()
             }
 
+            // Agregar el botón negativo (No)
+            builder2.setNegativeButton("No") { dialog, which ->
+                // Actualizar los datos de la tarea
+
+                if(selected !=null){
+                    var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
+                    selected[position].id  = selected[position].id
+                    selected[position].name = nameInput.text.toString()
+                    selected[position].nMedi = nameMedi.text.toString()
+                    selected[position].viaAdmin = medioSeleccionado
+                    selected[position].present = medioSeleccionado2
+                    selected[position].mili = mili.text.toString()
+                    selected[position].frecToma = frec.text.toString()
+                    selected[position].time = LocalTime.parse(eventTimeTV.text.toString())
+                    selected[position].date = LocalDate.parse(fInicio.text.toString())
+                    selected[position].dateFinish = LocalDate.parse(fFinal.text.toString())
+                    var result = sqLiteManager.updateCalendarInDB(selected[position])
+                    selected.set(position,selected[position])
+                    if(result){
+                        Common.showToastMessage(this,"Medicamento actualizado correctamente")
+
+                    }else{
+                        Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                    }
+
+                    adapter.notifyDataSetChanged()
+                    var intent = Intent()
+                    intent = intent.putExtra("objUpdate",selected)
+                    setResult(Activity.RESULT_OK,intent)
+                    finish()
+                }
+            }
+
+            // Crear y mostrar la ventana emergente
+            val dialog2: AlertDialog = builder2.create()
+            dialog2.show()
         }
         builder.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.cancel()
@@ -165,6 +207,99 @@ class editMedicamento : AppCompatActivity() {
         dialog.window?.setWindowAnimations(R.style.DialogStyle)
         dialog.setView(inputLayout)
 
+        dialog.show()
+    }
+
+
+    private fun mostrarVentanaEmergente(position: Int) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirmación")
+        builder.setMessage("¿Desea actualizar todos los medicamentos?")
+        val inputLayout = LayoutInflater.from(this).inflate(R.layout.event_id, null)
+        eventTimeTV = inputLayout.findViewById(R.id.btnHourPicker)
+        val nameMedi = inputLayout.findViewById<EditText>(R.id.etNomMedi)
+        val nameInput = inputLayout.findViewById<EditText>(R.id.etNomComer)
+        val viaAdmin = inputLayout.findViewById<Spinner>(R.id.spinViaAdmi)
+        val presentacion = inputLayout.findViewById<Spinner>(R.id.spinPresent)
+        val mili = inputLayout.findViewById<EditText>(R.id.etCantMg)
+        val fInicio = inputLayout.findViewById<EditText>(R.id.etFechaInicio)
+        val fFinal = inputLayout.findViewById<EditText>(R.id.etFechaFinal)
+        val frec = inputLayout.findViewById<EditText>(R.id.spinTomarlo)
+
+        onClickSpinners(inputLayout)
+        nameInput.setText(selectedTask.name)
+        nameMedi.setText(selectedTask.nMedi)
+        mili.setText(selectedTask.mili)
+        eventTimeTV.text = selectedTask.time.toString()
+        fInicio.setText(selectedTask.date.toString())
+        fFinal.setText(selectedTask.dateFinish.toString())
+        frec.setText(selectedTask.frecToma)
+        initWidgets(inputLayout)
+        // Agregar el botón positivo (Sí)
+        builder.setPositiveButton("Sí") { dialog, which ->
+            // Acción a realizar si el usuario selecciona "Sí"
+            if(selected !=null){
+                var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
+                selected[position].id  = selected[position].id
+                selected[position].name = nameInput.text.toString()
+                selected[position].nMedi = nameMedi.text.toString()
+                selected[position].viaAdmin = medioSeleccionado
+                selected[position].present = medioSeleccionado2
+                selected[position].mili = mili.text.toString()
+                selected[position].frecToma = frec.text.toString()
+                selected[position].time = LocalTime.parse(eventTimeTV.text.toString())
+                selected[position].date = LocalDate.parse(fInicio.text.toString())
+                selected[position].dateFinish = LocalDate.parse(fFinal.text.toString())
+                var result = sqLiteManager.updateCalendarAllInDB(selected[position])
+                selected.set(position,selected[position])
+                if(result){
+                    Event.eventsList.clear()
+                    Common.showToastMessage(this,"Medicamento actualizado correctamente")
+
+                }else{
+                    Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                }
+
+                var intent = Intent()
+                setResult(3,intent)
+                finish()
+            }
+        }
+
+        // Agregar el botón negativo (No)
+        builder.setNegativeButton("No") { dialog, which ->
+            // Actualizar los datos de la tarea
+
+            if(selected !=null){
+                var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
+                selected[position].id  = selected[position].id
+                selected[position].name = nameInput.text.toString()
+                selected[position].nMedi = nameMedi.text.toString()
+                selected[position].viaAdmin = medioSeleccionado
+                selected[position].present = medioSeleccionado2
+                selected[position].mili = mili.text.toString()
+                selected[position].frecToma = frec.text.toString()
+                selected[position].time = LocalTime.parse(eventTimeTV.text.toString())
+                selected[position].date = LocalDate.parse(fInicio.text.toString())
+                selected[position].dateFinish = LocalDate.parse(fFinal.text.toString())
+                var result = sqLiteManager.updateCalendarInDB(selected[position])
+                selected.set(position,selected[position])
+                if(result){
+                    Common.showToastMessage(this,"Medicamento actualizado correctamente")
+
+                }else{
+                    Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                }
+
+                var intent = Intent()
+                intent = intent.putExtra("objUpdate",selected)
+                setResult(Activity.RESULT_OK,intent)
+                finish()
+            }
+        }
+
+        // Crear y mostrar la ventana emergente
+        val dialog: AlertDialog = builder.create()
         dialog.show()
     }
 

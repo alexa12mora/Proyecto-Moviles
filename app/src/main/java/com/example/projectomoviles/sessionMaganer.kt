@@ -14,8 +14,8 @@ class sessionManager(context: Context) {
         editor = sharedPreferences.edit()
     }
 
-    fun startSession(userId: String) {
-        editor.putString(KEY_USER_ID, userId)
+    fun startSession(userId: Int) {
+        editor.putInt(KEY_USER_ID, userId)
         editor.apply()
     }
 
@@ -23,8 +23,8 @@ class sessionManager(context: Context) {
         return sharedPreferences.contains(KEY_USER_ID)
     }
 
-    fun getUserId(): String {
-        return sharedPreferences.getString(KEY_USER_ID, "") ?: ""
+    fun getUserId(): Int {
+        return sharedPreferences.getInt(KEY_USER_ID, 0) ?: 0
     }
 
     fun endSession() {

@@ -8,7 +8,7 @@ import com.example.projectomoviles.calendario.calendario
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class activity_home : Base_Activity(){
+class activity_home  : Base_Activity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         lateinit var sessionManager: sessionManager;
         super.onCreate(savedInstanceState)
