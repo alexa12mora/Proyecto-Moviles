@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "moviles.db";
+    private static final String DATABASE_NAME = "db.db";
     private static final int DATABASE_VERSION = 1;
 
     public MyDatabaseHelper(Context context) {
@@ -24,7 +24,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)";
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, name TEXT, edad INTEGER)";
         db.execSQL(createTableQuery);
         db.execSQL("CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, hour TEXT, nomMedi TEXT, nomComer TEXT, present TEXT, viaAdmin TEXT, mili TEXT, fInicio TEXT, fSuspension TEXT, frecToma TEXT, idUsuario INTEGER, idGroupMedi INTEGER, FOREIGN KEY (idUsuario)  REFERENCES users(id))");
     }
@@ -39,26 +39,26 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String username, String password) {
+    public boolean insertData(String username, String password, String name, int edad) {
         SQLiteDatabase db = getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
-        contentValues.put("password",password);
-        long result = db.insert("users", null,contentValues);
-        if(result==-1) return false;
-        else
-            return true;
+        contentValues.put("password", password);
+        contentValues.put("name", name);
+        contentValues.put("edad", edad);
+        long result = db.insert("users", null, contentValues);
+        return result != -1;
     }
-    public boolean updateData(String username, String newPassword) {
+
+    public boolean updateData(String username, String newPassword, String newName, int newEdad) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("password", newPassword);
+        contentValues.put("name", newName);
+        contentValues.put("edad", newEdad);
         int rowsAffected = db.update("users", contentValues, "username=?", new String[]{username});
         return rowsAffected > 0;
     }
-
-
-
 
     public boolean chechUser(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -127,7 +127,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 }
             }
         }
-
     }
 
     //metodo para obtener el ultimo id que se ingresó en la tabla de calendario
@@ -135,13 +134,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String consulta = "SELECT MAX(id) FROM calendar";
         Cursor cursor = db.rawQuery(consulta, null);
-
         int ultimoId = -1;
-
         if (cursor.moveToFirst()) {
             ultimoId = cursor.getInt(0);
         }
-
         cursor.close();
         db.close();
 

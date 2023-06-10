@@ -14,7 +14,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="268dp"
+            android:layout_height="230dp"
             android:background="@drawable/blue_bg">
 
             <ImageView
@@ -46,12 +46,13 @@
             android:layout_marginRight="62dp"
             android:background="@drawable/blue_border_rounded_cornwe">
 
+
+
             <!-- INPUT -->
             <EditText
                 android:id="@+id/username_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/username_icon"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="textEmailAddress"
@@ -64,16 +65,85 @@
                 android:textStyle="bold" />
 
             <!-- ICON -->
-            <ImageView
-                android:id="@+id/username_icon"
-                android:layout_width="14.7dp"
-                android:layout_height="10.3dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/email" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill_vertical"
+                android:paddingTop="-10dp"
+                android:shadowColor="@color/design_default_color_primary_dark"
+                android:text="    Correo" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativeloyoutNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="12.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
 
+            <!-- INPUT -->
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- ICON -->
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill_vertical"
+                android:text="    Nombre" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativeloyoutEdad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="12.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <!-- INPUT -->
+            <EditText
+                android:id="@+id/edad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- ICON -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill_vertical"
+                android:text="    Edad" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relativeloyoutContra"
@@ -89,10 +159,8 @@
                 android:id="@+id/pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/icon"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
-                android:inputType="textPassword"
                 android:maxLength="10"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
@@ -103,13 +171,12 @@
                 android:textStyle="bold" />
 
             <!-- ICON -->
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="14.7dp"
-                android:layout_height="10.3dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/password" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill_vertical"
+                android:text="    Contraseña" />
 
         </RelativeLayout>
 
@@ -122,15 +189,14 @@
             android:layout_marginRight="62dp"
             android:background="@drawable/blue_border_rounded_cornwe">
 
+
             <!-- INPUT -->
             <EditText
                 android:id="@+id/pass_ver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/icon1"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
-                android:inputType="textPassword"
                 android:maxLength="10"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
@@ -141,18 +207,17 @@
                 android:textStyle="bold" />
 
             <!-- ICON -->
-            <ImageView
-                android:id="@+id/icon1"
-                android:layout_width="14.7dp"
-                android:layout_height="10.3dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/password" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill_vertical"
+                android:text="    Repite contraseña" />
 
         </RelativeLayout>
 
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonUpdate"
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:layout_gravity="center"

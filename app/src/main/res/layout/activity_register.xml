@@ -15,7 +15,7 @@ android:background="@color/black">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="268dp"
+        android:layout_height="240dp"
         android:background="@drawable/blue_bg">
 
         <ImageView
@@ -43,9 +43,10 @@ android:background="@color/black">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="62dp"
-        android:layout_marginTop="36.7dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="62dp"
         android:background="@drawable/blue_border_rounded_cornwe">
+
 
         <!-- INPUT -->
         <EditText
@@ -76,6 +77,81 @@ android:background="@color/black">
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/relativeloyoutNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="12.7dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/blue_border_rounded_cornwe">
+
+        <!-- INPUT -->
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/name_register"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Nombre completo"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="17dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- ICON -->
+        <ImageView
+            android:id="@+id/name_register"
+            android:layout_width="14.7dp"
+            android:layout_height="15.3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/name" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeloyoutEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="12.7dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/blue_border_rounded_cornwe">
+
+        <!-- INPUT -->
+        <EditText
+            android:id="@+id/edad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/age"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Edad"
+            android:inputType="number"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingLeft="17dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- ICON -->
+        <ImageView
+            android:id="@+id/age"
+            android:layout_width="20dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/age" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeloyoutContra"
@@ -91,7 +167,7 @@ android:background="@color/black">
             android:id="@+id/pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/icon"
+            android:layout_toRightOf="@+id/contra"
             android:background="@android:color/transparent"
             android:fontFamily="@font/poppins_regular"
             android:hint="Contraseña"
@@ -107,7 +183,7 @@ android:background="@color/black">
 
         <!-- ICON -->
         <ImageView
-            android:id="@+id/icon"
+            android:id="@+id/contra"
             android:layout_width="14.7dp"
             android:layout_height="10.3dp"
             android:layout_centerVertical="true"
@@ -115,7 +191,6 @@ android:background="@color/black">
             android:src="@drawable/password" />
 
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/relativeloyoutRepiContra"
         android:layout_width="wrap_content"
@@ -154,6 +229,7 @@ android:background="@color/black">
             android:src="@drawable/password" />
 
     </RelativeLayout>
+
 
     <Button
         android:id="@+id/buttonLogin"
