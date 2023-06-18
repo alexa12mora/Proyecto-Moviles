@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -60,19 +61,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-53dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="90dp">
 
 
+        <!-- Cuadro 4 -->
 
         <LinearLayout
-            android:id="@+id/box1"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:id="@+id/boxUser"
+            android:layout_width="161dp"
+            android:layout_height="58dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="291dp">
+            android:layout_marginTop="294dp">
 
             <!-- Icono en la esquina superior derecha -->
             <ImageView
@@ -81,24 +83,23 @@
                 android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="8dp"
-                android:src="@drawable/user" />
+                android:src="@drawable/userhome" />
+
+            <ImageView
+                android:id="@+id/imageView0"
+                android:layout_width="108dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/line" />
 
             <!-- Texto del nombre -->
-            <TextView
-                android:id="@+id/name1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
 
         </LinearLayout>
 
-        <!-- Cuadro 4 -->
-
         <LinearLayout
-            android:id="@+id/box2"
+            android:id="@+id/boxCalendar"
             android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_height="65dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="289dp"
@@ -110,48 +111,136 @@
                 android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="8dp"
-                android:src="@drawable/user" />
+                android:src="@drawable/calendarhome" />
 
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/line" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/box3"
+            android:id="@+id/boxNotification"
             android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/tvNotifications"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="0dp">
+
+            <!-- Icono en la esquina superior derecha -->
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                android:src="@drawable/bellhome" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/line" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/boxMain"
+            android:layout_width="158dp"
+            android:layout_height="63dp"
+            android:layout_above="@+id/tvLogout"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="39dp"
+            android:layout_marginBottom="0dp">
+
+            <!-- Icono en la esquina superior derecha -->
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                android:src="@drawable/logouthome" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="111dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/line" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_above="@+id/boxNotification"
+            android:layout_below="@+id/boxUser"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="53dp"
+            android:fontFamily="sans-serif-medium"
+            android:text=" Configurar perfil"
+            android:textColor="#B8B7B7"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvNotifications"
+            android:layout_width="142dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="29dp"
-            android:layout_marginBottom="107dp">
+            android:layout_marginStart="42dp"
+            android:layout_marginBottom="148dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="     Visualizar notificaciones"
+            android:textColor="#B8B7B7"
+            android:textSize="20sp" />
 
-            <!-- Icono en la esquina superior derecha -->
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/user" />
+        <TextView
+            android:id="@+id/tvCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_above="@+id/boxNotification"
+            android:layout_below="@+id/boxUser"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="51dp"
+            android:fontFamily="sans-serif-medium"
+            android:text=" Ver calendario"
+            android:textColor="#B8B7B7"
+            android:textSize="20sp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/box4"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+        <TextView
+            android:id="@+id/tvLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="37dp"
-            android:layout_marginBottom="108dp">
+            android:layout_marginEnd="57dp"
+            android:layout_marginBottom="149dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Cerrar sesión"
+            android:textColor="#B8B7B7"
+            android:textSize="20sp" />
 
-            <!-- Icono en la esquina superior derecha -->
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/user" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="143dp"
+            android:src="@drawable/logo" />
 
 
     </RelativeLayout>

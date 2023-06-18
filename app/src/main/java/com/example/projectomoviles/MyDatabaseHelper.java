@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "mydatabase.db";
+    private static final String DATABASE_NAME = "moviles.db";
     private static final int DATABASE_VERSION = 1;
 
     public MyDatabaseHelper(Context context) {
