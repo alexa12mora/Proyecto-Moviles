@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.projectomoviles.Notification.Notification
 import com.example.projectomoviles.calendario.Event
 import com.example.projectomoviles.calendario.calendario
 import com.google.android.material.appbar.MaterialToolbar
@@ -70,7 +71,7 @@ class activity_home  : Base_Activity(){
 
         boxNotification.setOnClickListener {
             // Cambiar calendario::class.java -> por el de notificación cuando esté hecho.
-            val intent = Intent(this, calendario::class.java)
+            val intent = Intent(this, Notification::class.java)
             Event.eventsList.clear()
             startActivity(intent)
             finish();
@@ -78,7 +79,7 @@ class activity_home  : Base_Activity(){
 
         tvNotifications.setOnClickListener {
             // Cambiar calendario::class.java -> por el de notificación cuando esté hecho.
-            val intent = Intent(this, calendario::class.java)
+            val intent = Intent(this, Notification::class.java)
             Event.eventsList.clear()
             startActivity(intent)
             finish();

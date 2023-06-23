@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.REQUEST_SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -9,8 +16,19 @@
         android:icon="@mipmap/logo"
         android:label=""
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/Theme.Alarma"
         tools:targetApi="31">
+
+        <activity
+            android:name=".Notification.Notification"
+            android:exported="false" />
+        <activity
+            android:name=".Notification.AlarmModel"
+            android:exported="false" />
+        <receiver
+            android:name=".Notification.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
         <activity
             android:name=".activity_user_d"
             android:exported="false" />
