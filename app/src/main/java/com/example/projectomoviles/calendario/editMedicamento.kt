@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.util.Common
+import es.dmoral.toasty.Toasty
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
@@ -128,10 +129,9 @@ class editMedicamento : AppCompatActivity() {
                     selected.set(position,selected[position])
                     Event.eventsList.clear()
                     if(result){
-                        Common.showToastMessage(this,"Medicamento actualizado correctamente")
-
+                        Toasty.info(this, "Medicamento actualizado correctamente!", Toast.LENGTH_LONG, true).show()
                     }else{
-                        Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                        Toasty.error(this, "Ha ocurrido un error al intentar actualizar el medicamento.", Toast.LENGTH_LONG, true).show()
                     }
                     adapter.notifyDataSetChanged()
                     var intent = Intent()
@@ -159,10 +159,10 @@ class editMedicamento : AppCompatActivity() {
                     var result = sqLiteManager.updateCalendarInDB(selected[position])
                     selected.set(position,selected[position])
                     if(result){
-                        Common.showToastMessage(this,"Medicamento actualizado correctamente")
+                        Toasty.info(this, "Medicamento actualizado correctamente!", Toast.LENGTH_LONG, true).show()
 
                     }else{
-                        Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                        Toasty.error(this, "Ha ocurrido un error al intentar actualizar el medicamento.", Toast.LENGTH_LONG, true).show()
                     }
 
                     adapter.notifyDataSetChanged()
@@ -254,10 +254,10 @@ class editMedicamento : AppCompatActivity() {
                 selected.set(position,selected[position])
                 if(result){
                     Event.eventsList.clear()
-                    Common.showToastMessage(this,"Medicamento actualizado correctamente")
+                    Toasty.info(this, "Medicamento actualizado correctamente", Toast.LENGTH_LONG, true).show()
 
                 }else{
-                    Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                    Toasty.error(this, "Ha ocurrido un error al intentar actualizar el medicamento.", Toast.LENGTH_LONG, true).show()
                 }
 
                 var intent = Intent()
@@ -285,10 +285,11 @@ class editMedicamento : AppCompatActivity() {
                 var result = sqLiteManager.updateCalendarInDB(selected[position])
                 selected.set(position,selected[position])
                 if(result){
+                    Toasty.info(this, "Medicamento actualizado correctamente", Toast.LENGTH_LONG, true).show()
                     Common.showToastMessage(this,"Medicamento actualizado correctamente")
 
                 }else{
-                    Common.showToastMessage(this,"Ha ocurrido un error al intentar actualizar el medicamento.")
+                    Toasty.error(this, "Ha ocurrido un error al intentar actualizar el medicamento.", Toast.LENGTH_LONG, true).show()
                 }
 
                 var intent = Intent()
@@ -311,10 +312,12 @@ class editMedicamento : AppCompatActivity() {
         var sqLiteManager: MyDatabaseHelper = MyDatabaseHelper(this)
         var result = sqLiteManager.deleteEventInDB(selected[position].id)
         if(result){
+            Toasty.info(this, "Medicamento eliminado correctamente.", Toast.LENGTH_LONG, true).show()
             Common.showToastMessage(this,"Medicamento eliminado correctamente")
 
         }else{
-            Common.showToastMessage(this,"Ha ocurrido un error al intentar eliminar el medicamento.")
+            Toasty.error(this, "Ha ocurrido un error al intentar eliminar el medicamento..", Toast.LENGTH_LONG, true).show()
+
         }
 
         finish()

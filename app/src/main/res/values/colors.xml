@@ -10,7 +10,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
     <color name="edit_text_background_color">#F0F0F0</color>
     <color name="edit_text_border_color">#CCCCCC</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="light_black">#504f4f</color>
 </resources>

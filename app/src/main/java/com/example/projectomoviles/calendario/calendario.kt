@@ -193,9 +193,5 @@ class calendario :Base_Activity(){
         selectedDate = selectedDate.plusDays(1)
         setDayView()
     }
-
-
-
-
 }
 

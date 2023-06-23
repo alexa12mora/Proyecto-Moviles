@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Toast
+import es.dmoral.toasty.Toasty
 
 class activity_register : AppCompatActivity() {
     private lateinit var dbHelper: MyDatabaseHelper
@@ -43,21 +44,21 @@ class activity_register : AppCompatActivity() {
             if (enteredUsername.isNotEmpty() && enteredPassword.isNotEmpty() && enteredRepeatPassword.isNotEmpty() && enteredName.isNotEmpty() && enterededad.isNotEmpty()) {
                 if (enteredPassword == enteredRepeatPassword) {
                     if (dbHelper.chechUser(enteredUsername)) {
-                        showToast("Usuario ya existe, inicie sesión");
+                        Toasty.warning(this, "Usuario ya existe, inicie sesión!", Toast.LENGTH_LONG, true).show()
                     } else {
                         dbHelper.insertData(enteredUsername, enteredPassword,enteredName,enterededad.toInt());
-                        showToast("Usuario creado correctamente");
+                        Toasty.info(this, "Usuario creado correctamente!", Toast.LENGTH_LONG, true).show()
                         val intent = Intent(this, MainActivity::class.java);
                         startActivity(intent);
                         finish();
                     }
                 } else {
-                    showToast("Las contraseñas no coinciden");
+                    Toasty.error(this, "Las contraseñas no coinciden!", Toast.LENGTH_LONG, true).show()
                     findViewById<RelativeLayout>(R.id.relativeloyoutContra).setBackgroundResource(R.drawable.red_border);
                     findViewById<RelativeLayout>(R.id.relativeloyoutRepiContra).setBackgroundResource(R.drawable.red_border);
                 }
             } else {
-                showToast("Por favor, complete todos los campos ya que son requeridos");
+                showToast("Todos los campos son requeridos");
                 findViewById<RelativeLayout>(R.id.relativeloyoutCorreo).setBackgroundResource(R.drawable.red_border);
                 findViewById<RelativeLayout>(R.id.relativeloyoutContra).setBackgroundResource(R.drawable.red_border);
                 findViewById<RelativeLayout>(R.id.relativeloyoutRepiContra).setBackgroundResource(R.drawable.red_border);

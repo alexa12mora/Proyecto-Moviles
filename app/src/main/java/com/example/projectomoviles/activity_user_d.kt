@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import es.dmoral.toasty.Toasty
 
 class activity_user_d : Base_Activity() {
     private lateinit var sessionManager: sessionManager
@@ -48,17 +49,17 @@ class activity_user_d : Base_Activity() {
             if (enteredUsername.isNotEmpty() && enteredPassword.isNotEmpty() && enteredRepeatPassword.isNotEmpty() && enteredName.isNotEmpty() && enterededad.isNotEmpty()) {
                 if (enteredPassword == enteredRepeatPassword) {
                     dbHelper.updateData(enteredUsername, enteredPassword,enteredName,enterededad.toInt());
-                    showToast("Datos actualizado correctamente");
+                    Toasty.info(this, "Datos actualizados!", Toast.LENGTH_LONG, true).show()
                     val intent = Intent(this, activity_home::class.java);
                     startActivity(intent);
                     finish();
                 } else {
-                    showToast("Las contraseñas no coinciden");
+                    Toasty.error(this, "Las contraseñas no coinciden!", Toast.LENGTH_LONG, true).show()
                     findViewById<RelativeLayout>(R.id.relativeloyoutContra).setBackgroundResource(R.drawable.red_border);
                     findViewById<RelativeLayout>(R.id.relativeloyoutRepiContra).setBackgroundResource(R.drawable.red_border);
                 }
             } else {
-                showToast("Por favor, complete todos los campos ya que son requeridos");
+                Toasty.error(this, "Todos los campos son requeridos!", Toast.LENGTH_LONG, true).show()
                 findViewById<RelativeLayout>(R.id.relativeloyoutCorreo).setBackgroundResource(R.drawable.red_border);
                 findViewById<RelativeLayout>(R.id.relativeloyoutContra).setBackgroundResource(R.drawable.red_border);
                 findViewById<RelativeLayout>(R.id.relativeloyoutRepiContra).setBackgroundResource(R.drawable.red_border);

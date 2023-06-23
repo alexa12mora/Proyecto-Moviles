@@ -9,6 +9,10 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import es.dmoral.toasty.Toasty
+import www.sanju.motiontoast.MotionToast
+import www.sanju.motiontoast.MotionToastStyle
 
 class MainActivity : AppCompatActivity() {
     //Base de datos
@@ -37,27 +41,29 @@ class MainActivity : AppCompatActivity() {
             if (validateInputs(inputUsername, inputPassword)) {
                 if (dbHelper.chechUser(inputUsername)) {
                     if (dbHelper.chechUserPassword(inputUsername, inputPassword)) {
-                        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                        Toasty.success(this, "Inicio de sesion exitoso!", Toast.LENGTH_LONG, true).show()
                         sessionManager.startSession(dbHelper.getIdUser(inputUsername));
                         val intent = Intent(this, activity_home::class.java);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out) // Aplicar animación de desvanecimiento
                         finish();
                     } else {
-                        Toast.makeText(this, "Credenciales inválidas", Toast.LENGTH_SHORT).show()
+                        Toasty.error(this, "Credenciales inválidas!", Toast.LENGTH_LONG, true).show()
                         findViewById<RelativeLayout>(R.id.relativeLoyoutContrasenia).setBackgroundResource(R.drawable.red_border)
                         findViewById<RelativeLayout>(R.id.relativeLoyoutCorreo).setBackgroundResource(R.drawable.red_border)
                     }
                 } else {
-                    Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                    Toasty.warning(this, "Usuario no encontrado!", Toast.LENGTH_LONG, true).show()
                 }
             } else {
-                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+                Toasty.warning(this, "Por favor, complete todos los campos!", Toast.LENGTH_LONG, true).show()
             }
         }
-
         notienecuenta.setOnClickListener {
             val intent = Intent(this, activity_register::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out) // Aplicar animación de desvanecimiento
+            finish();
         }
     }
     private fun validateInputs(username: String, password: String): Boolean {
