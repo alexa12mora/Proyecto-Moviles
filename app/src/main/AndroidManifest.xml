@@ -16,7 +16,7 @@
         android:icon="@mipmap/logo"
         android:label=""
         android:supportsRtl="true"
-        android:theme="@style/Theme.Alarma"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
 
         <activity

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.projectomoviles.Notification.Notification
 
 import com.example.projectomoviles.calendario.Event
 import com.example.projectomoviles.calendario.calendario
@@ -86,7 +87,7 @@ class activity_home : Base_Activity(){
 
         boxNotification.setOnClickListener {
             // Cambiar calendario::class.java -> por el de notificación cuando esté hecho.
-            val intent = Intent(this, calendario::class.java)
+            val intent = Intent(this, Notification::class.java)
             Event.eventsList.clear()
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out) // Aplicar animación de desvanecimiento
@@ -95,7 +96,7 @@ class activity_home : Base_Activity(){
 
         tvNotifications.setOnClickListener {
             // Cambiar calendario::class.java -> por el de notificación cuando esté hecho.
-            val intent = Intent(this, calendario::class.java)
+            val intent = Intent(this, Notification::class.java)
             Event.eventsList.clear()
             startActivity(intent)
             finish();

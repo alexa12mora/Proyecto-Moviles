@@ -10,27 +10,33 @@ import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import es.dmoral.toasty.Toasty
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.projectomoviles.Base_Activity
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.R
 import com.example.projectomoviles.sessionManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class Notification : AppCompatActivity() {
+class Notification : Base_Activity() {
     private lateinit var dbHelper: MyDatabaseHelper
     private lateinit var listViewAlarms: ListView
     private lateinit var alarmReceiver: BroadcastReceiver
     private lateinit var alarmIntent: PendingIntent
     private lateinit var alarmManager: AlarmManager
-
+    @SuppressLint("MissingInflatedId", "ClickableViewAccessibility")
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.notificacion)
 
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
         // Inicializar DatabaseHelper
         dbHelper = MyDatabaseHelper(this)
 
@@ -39,9 +45,6 @@ class Notification : AppCompatActivity() {
         // Configurar receptor de difusión (BroadcastReceiver)
         alarmReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                // Acciones a realizar cuando se active la alarma
-                // En este ejemplo, mostraremos un mensaje de tostada (Toast)
-                showToast("¡Alarma activada!")
                 // Mostrar notificación
                 showNotification("Recordatorio", "Es hora de tomar su medicamento")
             }
@@ -57,6 +60,7 @@ class Notification : AppCompatActivity() {
 
         // Configurar ListView
         listViewAlarms = findViewById(R.id.listView)
+
         loadAlarms()
 
         // Configurar botón de programar alarma
@@ -91,6 +95,7 @@ class Notification : AppCompatActivity() {
 
     private fun eliminarTarea(id: Long) {
         dbHelper.deleteAlarm(id)
+        Toasty.info(this, "Alarma eliminada correctamente.", Toast.LENGTH_LONG, true).show()
         loadAlarms()
     }
 
@@ -99,6 +104,28 @@ class Notification : AppCompatActivity() {
         var userId: Int
         sessionManager = sessionManager(this)
         userId = sessionManager.getUserId()
+
+        // Crear un ViewBinder personalizado
+        val viewBinder = SimpleCursorAdapter.ViewBinder { view, cursor, columnIndex ->
+            // Obtener el TextView del elemento de la vista
+            val textView = view as? TextView
+            if (textView != null) {
+                // Obtener el valor del texto del cursor
+                val text = cursor.getString(columnIndex)
+
+                // Cambiar el color de texto del TextView
+                textView.setTextColor(Color.WHITE) // Cambia el color aquí según tus necesidades
+
+                // Asignar el texto al TextView
+                textView.text = text
+
+                // Indicar que el enlace se ha realizado correctamente
+                return@ViewBinder true
+            }
+
+            // Si no es un TextView, se indica que el enlace no se ha realizado correctamente
+            return@ViewBinder false
+        }
 
         val cursor = dbHelper.getAllAlarms(userId)
         val adapter = SimpleCursorAdapter(
@@ -112,15 +139,24 @@ class Notification : AppCompatActivity() {
         // Iterar sobre el cursor y programar las alarmas
         if (cursor != null && cursor.moveToFirst()) {
             do {
+                val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+                val date1: Date = format.parse(cursor.getString(cursor.getColumnIndexOrThrow("time")))
+                val currentDateTime = Calendar.getInstance().time
+
+
                 val alarmId =
                     cursor.getLong(cursor.getColumnIndexOrThrow("_id"))
                 val time =
                     cursor.getString(cursor.getColumnIndexOrThrow("time"))
 
                 // Programar la alarma
-                scheduleAlarmFromDatabase(alarmId, time)
+                if(currentDateTime <= date1){
+                    scheduleAlarmFromDatabase(alarmId, time)
+                }
+
             } while (cursor.moveToNext())
         }
+        adapter.viewBinder = viewBinder
         listViewAlarms.adapter = adapter
     }
 
@@ -283,6 +319,7 @@ class Notification : AppCompatActivity() {
         val title = "Alarma programada"
         val time = alarmTimeString
         dbHelper.updateAlarm(id, title, time)
+        Toasty.info(this, "Alarma actualizada correctamente!", Toast.LENGTH_LONG, true).show()
         // Actualizar ListView
         loadAlarms()
     }
@@ -304,6 +341,7 @@ class Notification : AppCompatActivity() {
         val title = "Alarma programada"
         val time = alarmTimeString
         dbHelper.insertAlarm(title, time, userId)
+        Toasty.info(this, "Alarma guardada correctamente", Toast.LENGTH_LONG, true).show()
         // Actualizar ListView
         loadAlarms()
     }
@@ -318,7 +356,7 @@ class Notification : AppCompatActivity() {
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setContentTitle(title)
             .setContentText(content)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.logo)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         // Crear canal de notificación (solo es necesario una vez)
@@ -338,4 +376,5 @@ class Notification : AppCompatActivity() {
         private const val ALARM_ACTION = "com.example.alarma.ALARM_ACTION"
     }
 }
+
 

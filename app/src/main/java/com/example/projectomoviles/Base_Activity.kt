@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projectomoviles.Notification.Notification
 import com.example.projectomoviles.calendario.Event
 import com.example.projectomoviles.calendario.calendario
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,7 +35,7 @@ open class Base_Activity : AppCompatActivity(), BottomNavigationView.OnNavigatio
                 return true
             }
             R.id.nav_notification -> {
-                val intent = Intent(this, calendario::class.java)
+                val intent = Intent(this, Notification::class.java)
                 Event.eventsList.clear()
                 startActivity(intent)
                 return true
