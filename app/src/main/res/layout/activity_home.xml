@@ -50,7 +50,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/activity_menu_user"
+
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
             app:itemBackground="@color/white"
@@ -58,204 +58,228 @@
 
     </FrameLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="90dp">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
 
-
-        <!-- Cuadro 4 -->
-
-        <LinearLayout
-            android:id="@+id/boxUser"
-            android:layout_width="161dp"
-            android:layout_height="58dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="294dp">
-
-            <!-- Icono en la esquina superior derecha -->
-            <ImageView
-                android:id="@+id/icon1"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/userhome" />
-
-            <ImageView
-                android:id="@+id/imageView0"
-                android:layout_width="108dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/line" />
-
-            <!-- Texto del nombre -->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/boxCalendar"
-            android:layout_width="160dp"
-            android:layout_height="65dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="289dp"
-            android:layout_marginEnd="38dp">
-
-            <!-- Icono en la esquina superior derecha -->
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/calendarhome" />
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="112dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/line" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/boxNotification"
-            android:layout_width="160dp"
-            android:layout_height="60dp"
-            android:layout_above="@+id/tvNotifications"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="29dp"
-            android:layout_marginBottom="0dp">
-
-            <!-- Icono en la esquina superior derecha -->
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/bellhome" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="112dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/line" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/boxMain"
-            android:layout_width="158dp"
-            android:layout_height="63dp"
-            android:layout_above="@+id/tvLogout"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="39dp"
-            android:layout_marginBottom="0dp">
-
-            <!-- Icono en la esquina superior derecha -->
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/logouthome" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="111dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/line" />
-
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvUser"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_above="@+id/boxNotification"
-            android:layout_below="@+id/boxUser"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="53dp"
-            android:fontFamily="sans-serif-medium"
-            android:text=" Configurar perfil"
-            android:textColor="#B8B7B7"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvNotifications"
-            android:layout_width="142dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="42dp"
-            android:layout_marginBottom="148dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="     Visualizar notificaciones"
-            android:textColor="#B8B7B7"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvCalendar"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_above="@+id/boxNotification"
-            android:layout_below="@+id/boxUser"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="51dp"
-            android:layout_marginBottom="51dp"
-            android:fontFamily="sans-serif-medium"
-            android:text=" Ver calendario"
-            android:textColor="#B8B7B7"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="57dp"
-            android:layout_marginBottom="149dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Cerrar sesión"
-            android:textColor="#B8B7B7"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="143dp"
-            android:src="@drawable/logo" />
+            android:layout_margin="20dp"
+            android:text=""
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <GridLayout
+            android:layout_width="393dp"
+            android:layout_height="181dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="1"
+            android:columnOrderPreserved="false"
+            android:rowCount="4">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="360dp"
+                android:layout_height="170dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/custom_dark_toast"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/containerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="121dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/logo" />
+
+                    <TextView
+                        android:id="@+id/nombreusuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:padding="16dp"
+                        android:text="Bienvenido {Nombre}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:padding="16dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="392dp"
+            android:layout_height="378dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+            android:rowCount="4">
 
 
-    </RelativeLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/custom_dark_toast"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:menu="@menu/activity_main_drawer"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:itemBackground="@color/black"
-        app:itemRippleColor="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent" />
+                <LinearLayout
+                    android:id="@+id/boxUser"
+                    android:layout_width="168dp"
+                    android:layout_height="175dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="59dp"
+                        android:layout_height="37dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/userhome" />
+
+                    <TextView
+                        android:id="@+id/tvUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Configurar perfil"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/custom_dark_toast"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/boxCalendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="43dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/calendarhome" />
+
+                    <TextView
+                        android:id="@+id/tvCalendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Ver calendario"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/custom_dark_toast"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/boxNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="44dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/bellhome" />
+
+                    <TextView
+                        android:id="@+id/tvNotifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Notificaciones"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/custom_dark_toast"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/boxMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="43dp"
+                        android:layout_height="37dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/logouthome" />
+
+                    <TextView
+                        android:id="@+id/tvLogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Salir"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

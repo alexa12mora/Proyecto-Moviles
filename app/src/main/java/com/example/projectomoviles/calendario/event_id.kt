@@ -9,16 +9,19 @@ import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
+import com.example.projectomoviles.Base_Activity
 import com.example.projectomoviles.MyDatabaseHelper
 import com.example.projectomoviles.R
 import com.example.projectomoviles.sessionManager
 import com.example.projectomoviles.util.Common
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import es.dmoral.toasty.Toasty
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class event_id : AppCompatActivity() {
+class event_id : Base_Activity() {
     private lateinit var dbHelper: MyDatabaseHelper
     //Se declaran las variables
     lateinit var  eNom: EditText
@@ -47,7 +50,8 @@ class event_id : AppCompatActivity() {
         initWidgets()
         time = LocalTime.now()
         btnBack()
-
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
         //Se crea una lista que contenga todos los edit text para validacion
         textBoxes = listOf<EditText> (eNom, mili,eventNameET,eventDateTV,eventDateFTV,frecToma)
         Common.initiateTextControl(textBoxes)
@@ -208,16 +212,16 @@ class event_id : AppCompatActivity() {
 
                 var result = dbHelper.addMedToDatabase(newEvent)
                 if(result){
-                    Common.showToastMessage(this,"El medicamento ha sido agregado al calendario exitosamente");
+                    Toasty.success(this, "El medicamento ha sido agregado al calendario exitosamente!", Toast.LENGTH_LONG, true).show()
 
                 }else{
-                    Common.showToastMessage(this, "Ha ocurrido un error agregando el medicamento")
+                    Toasty.error(this, "Ha ocurrido un error agregando el medicamento!", Toast.LENGTH_LONG, true).show()
                 }
                 fechaActual = fechaActual.plusDays(frec.toInt().toLong())
             }
             finish()
         }else{
-            Common.showToastMessage(this, "Campos requeridos: Por favor complete los campos para poder continuar")
+            Toasty.warning(this, "Campos requeridos: Por favor complete los campos para poder continuar\"!", Toast.LENGTH_LONG, true).show()
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.projectomoviles;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,15 +9,13 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.projectomoviles.Notification.AlarmModel;
 import com.example.projectomoviles.calendario.Event;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "movilesDB.db";
+    private static final String DATABASE_NAME = "dbproyecto.db";
     private static final int DATABASE_VERSION = 1;
 
     public MyDatabaseHelper(Context context) {
@@ -27,10 +24,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)";
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, name TEXT, edad INTEGER)";
         db.execSQL(createTableQuery);
         db.execSQL("CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, hour TEXT, nomMedi TEXT, nomComer TEXT, present TEXT, viaAdmin TEXT, mili TEXT, fInicio TEXT, fSuspension TEXT, frecToma TEXT, idUsuario INTEGER, idGroupMedi INTEGER, FOREIGN KEY (idUsuario)  REFERENCES users(id))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS alarms (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, time TEXT,idUsuario INTEGER, FOREIGN KEY (idUsuario)  REFERENCES users(id))");
     }
 
     @Override
@@ -38,27 +34,28 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // Aquí puedes ejecutar las sentencias SQL para actualizar tu esquema de base de datos si es necesario
         String dropTableQuery = "DROP TABLE IF EXISTS users";
         String dropTableCalendarQuery = "DROP TABLE IF EXISTS calendar";
-        String dropTableAlarmsQuery = "DROP TABLE IF EXISTS alarms";
         db.execSQL(dropTableQuery);
         db.execSQL(dropTableCalendarQuery);
-        db.execSQL(dropTableAlarmsQuery);
         onCreate(db);
     }
 
-    public boolean insertData(String username, String password) {
+    public boolean insertData(String username, String password, String name, int edad) {
         SQLiteDatabase db = getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
-        contentValues.put("password",password);
-        long result = db.insert("users", null,contentValues);
-        if(result==-1) return false;
-        else
-            return true;
+        contentValues.put("password", password);
+        contentValues.put("name", name);
+        contentValues.put("edad", edad);
+        long result = db.insert("users", null, contentValues);
+        return result != -1;
     }
-    public boolean updateData(String username, String newPassword) {
+
+    public boolean updateData(String username, String newPassword, String newName, int newEdad) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("password", newPassword);
+        contentValues.put("name", newName);
+        contentValues.put("edad", newEdad);
         int rowsAffected = db.update("users", contentValues, "username=?", new String[]{username});
         return rowsAffected > 0;
     }
@@ -130,7 +127,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 }
             }
         }
-
     }
 
     //metodo para obtener el ultimo id que se ingresó en la tabla de calendario
@@ -138,13 +134,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String consulta = "SELECT MAX(id) FROM calendar";
         Cursor cursor = db.rawQuery(consulta, null);
-
         int ultimoId = -1;
-
         if (cursor.moveToFirst()) {
             ultimoId = cursor.getInt(0);
         }
-
         cursor.close();
         db.close();
 
@@ -218,61 +211,5 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if(result==-1) return false;
         else
             return true;
-    }
-
-    public void insertAlarm(String title, String time, Integer id_user) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("title",title);
-        contentValues.put("time", time);
-        contentValues.put("idUsuario", id_user);
-        long result = db.insert("alarms", null, contentValues);
-    }
-
-    public Cursor getAllAlarms(Integer id_user) {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM alarms WHERE idUsuario =?" , new String[] {String.valueOf(id_user)});
-    }
-
-
-    public void deleteAlarm(long alarmId) {
-        SQLiteDatabase db = getWritableDatabase();
-        String whereClause = "_id = ?";
-        String[] whereArgs = { String.valueOf(alarmId) };
-        db.delete("alarms", whereClause, whereArgs);
-        db.close();
-    }
-
-    public AlarmModel getAlarmById(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] projection = {
-                "_id",
-                "title",
-                "time"
-        };
-        String selection = "_id = ?";
-        String[] selectionArgs = {String.valueOf(id)};
-        Cursor cursor = db.query("alarms", projection, selection, selectionArgs, null, null, null);
-        AlarmModel alarmModel = null;
-        if (cursor != null && cursor.moveToFirst()) {
-            @SuppressLint("Range") int alarmId = cursor.getInt(cursor.getColumnIndex("id"));
-            @SuppressLint("Range") String alarmTitle = cursor.getString(cursor.getColumnIndex("title"));
-            @SuppressLint("Range") long alarmTime = cursor.getLong(cursor.getColumnIndex("time"));
-            alarmModel = new AlarmModel(alarmId, alarmTitle, alarmTime);
-        }
-        if (cursor != null) {
-            cursor.close();
-        }
-        return alarmModel;
-    }
-    public boolean updateAlarm(int id, String title, String newTime) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("title", title);
-        values.put("time", newTime);
-        String selection = "_id = ?";
-        String[] selectionArgs = {String.valueOf(id)};
-        int rowsAffected = db.update("alarms", values, selection, selectionArgs);
-        return rowsAffected > 0;
     }
 }
