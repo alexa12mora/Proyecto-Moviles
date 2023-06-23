@@ -38,6 +38,7 @@ class activity_home : Base_Activity(){
                 R.id.nav_perfil -> {
                     sessionManager.endSession();
                     redirectToLoginActivity();
+                    finish();
                     true;
                 }
                 else -> false
@@ -117,9 +118,12 @@ class activity_home : Base_Activity(){
     }
     private fun redirectToLoginActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent);
-        finish();
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
+
+
     @SuppressLint("Range")
     private fun setAlarmsForEvents() {
         dbHelper = MyDatabaseHelper(this)
